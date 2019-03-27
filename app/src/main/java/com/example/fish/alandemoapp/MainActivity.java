@@ -8,6 +8,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ConstraintLayout mClFbLogin;
+    private ConstraintLayout mClGoogleLogin;
 
 
     @Override
@@ -20,10 +21,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initView() {
         mClFbLogin = findViewById(R.id.mainActivity_fbLoginConstraintLayout);
+        mClGoogleLogin = findViewById(R.id.mainActivity_googleLoginConstraintLayout);
     }
 
     private void initListener() {
         mClFbLogin.setOnClickListener(this);
+        mClGoogleLogin.setOnClickListener(this);
     }
 
     @Override
@@ -41,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.mainActivity_fbLoginConstraintLayout:
-
+                break;
+            case R.id.mainActivity_googleLoginConstraintLayout:
                 break;
         }
     }

@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ViewOnClick">
+        <item name="android:background">@drawable/ripple_green_click</item>
+    </style>
+
 </resources>

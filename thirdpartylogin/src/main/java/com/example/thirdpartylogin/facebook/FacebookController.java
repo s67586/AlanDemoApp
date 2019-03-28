@@ -1,4 +1,4 @@
-package com.example.thirdpartylogin;
+package com.example.thirdpartylogin.facebook;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.thirdpartylogin.Callback;
 import com.facebook.CallbackManager;
 
 import java.security.MessageDigest;
@@ -28,6 +29,7 @@ public class FacebookController {
     public static FacebookController newInstance(Activity activity) {
         if (mFacebookController == null) {
             mFacebookController = new FacebookController(activity);
+            mFacebookController.init();
         }
         return mFacebookController;
     }
@@ -68,15 +70,15 @@ public class FacebookController {
                 md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String KeyResult = new String(Base64.encode(md.digest(), 0));//String something = new String(Base64.encodeBytes(md.digest()));
-                Log.d("TAG", "hash key = " + KeyResult);
+                Log.e("TAG", "hash key = " + KeyResult);
                 Toast.makeText(mActivity, "My FB Key is \n" + KeyResult, Toast.LENGTH_LONG).show();
             }
         } catch (PackageManager.NameNotFoundException e1) {
-            Log.d("TAG", "name not found" + e1.toString());
+            Log.e("TAG", "name not found" + e1.toString());
         } catch (NoSuchAlgorithmException e) {
-            Log.d("TAG", "no such an algorithm" + e.toString());
+            Log.e("TAG", "no such an algorithm" + e.toString());
         } catch (Exception e) {
-            Log.d("TAG", "exception" + e.toString());
+            Log.e("TAG", "exception" + e.toString());
         }
     }
 

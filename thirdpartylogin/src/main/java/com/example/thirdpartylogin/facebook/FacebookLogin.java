@@ -1,9 +1,10 @@
-package com.example.thirdpartylogin;
+package com.example.thirdpartylogin.facebook;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.thirdpartylogin.Callback;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

@@ -1,4 +1,4 @@
-package com.example.thirdpartylogin;
+package com.example.thirdpartylogin.facebook;
 
 /**
  * 　Created by Alan on 2017/8/4.

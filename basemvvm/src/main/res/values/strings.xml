@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BaseMvvm</string>
+    <string name="first_back_pressed">再按一次退出APP</string>
+</resources>

@@ -17,10 +17,7 @@ import androidx.annotation.IdRes
 import com.example.basemvvm.BuildConfig
 import java.util.*
 
-class ALogger {
-    companion object {
-        val instance: ALogger by lazy { ALogger() }
-    }
+object ALog {
 
     private val TAG = "Alan"
 
@@ -965,23 +962,23 @@ class ALogger {
     /**
      * Log Enable SettingLobby
      */
-    protected fun isLogEnable(): Boolean {
+    fun isLogEnable(): Boolean {
         return mLogEnable
     }
 
-    protected fun isDebugLogEnable(): Boolean {
+    fun isDebugLogEnable(): Boolean {
         return mLogEnable && mDebugLogEnable
     }
 
-    protected fun isInfoLogEnable(): Boolean {
+    fun isInfoLogEnable(): Boolean {
         return mLogEnable && mInfoLogEnable
     }
 
-    protected fun isWarningLogEnable(): Boolean {
+    fun isWarningLogEnable(): Boolean {
         return mLogEnable && mWarningLogEnable
     }
 
-    protected fun isErrorLogEnable(): Boolean {
+    fun isErrorLogEnable(): Boolean {
         return mErrorLogEnable
     }
 

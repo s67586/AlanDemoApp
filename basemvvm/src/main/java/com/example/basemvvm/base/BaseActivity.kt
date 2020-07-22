@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.basemvvm.R
-import com.example.basemvvm.util.ALogger
 import com.example.basemvvm.util.GeneralTool
 import java.lang.reflect.ParameterizedType
 
@@ -26,7 +25,6 @@ import java.lang.reflect.ParameterizedType
 
 abstract class BaseActivity<T : ViewModel> : AppCompatActivity() {
 
-    val mALog: ALogger by lazy { ALogger.instance }
     lateinit var mViewModel: T
     private var mFirstPressedTime: Long = 0
 

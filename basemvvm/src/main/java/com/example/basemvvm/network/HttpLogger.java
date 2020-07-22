@@ -1,7 +1,7 @@
 package com.example.basemvvm.network;
 
 
-import com.example.basemvvm.util.ALogger;
+import com.example.basemvvm.util.ALog;
 import com.example.basemvvm.util.JsonUtil;
 
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -20,7 +20,7 @@ class HttpLogger implements HttpLoggingInterceptor.Logger {
         }
         mMessage.append(message.concat("\n"));
         if (message.startsWith("<-- END HTTP")) {
-            ALogger.Companion.getInstance().log(mMessage.toString());
+            ALog.INSTANCE.log(mMessage.toString());
         }
     }
 }

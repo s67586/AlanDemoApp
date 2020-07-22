@@ -1,8 +1,7 @@
 package com.example.basemvvm.network
 
 import com.example.basemvvm.BuildConfig
-import com.example.basemvvm.model.test
-import com.example.basemvvm.util.ALogger
+import com.example.basemvvm.util.ALog
 import kotlinx.coroutines.*
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
@@ -50,23 +49,24 @@ object Client {
 
     suspend inline fun <reified T> safeApiCall(crossinline callFunction: suspend () -> Response<T>): BaseResponse<T> =
             withContext(Dispatchers.IO) {
-        try {
-            val response = callFunction.invoke()
-            if (response.isSuccessful) {
-                if (response.body() == null) {
-                    if (T::class.java.simpleName == Unit.javaClass.simpleName)
-                        BaseResponse.Success(response.body() as T)
-                    else
-                        BaseResponse.Error(IllegalArgumentException("content error"))
-                } else
-                    BaseResponse.Success(response.body()!!)
-            } else
-                BaseResponse.Error(HttpException(response))
-        } catch (e: Exception) {
-            ALogger.instance.logError("Exception =  ${getErrorType(e)}")
-            BaseResponse.Error(e)
-        }
-    }
+                try {
+                    val response = callFunction.invoke()
+                    if (response.isSuccessful) {
+                        if (response.body() == null) {
+                            if (T::class.java.simpleName == Unit.javaClass.simpleName)
+
+                                BaseResponse.success(data = response.body() as T)
+                            else
+                                BaseResponse.error(data = null, message = getErrorType(IllegalArgumentException("content error")))
+                        } else
+                            BaseResponse.success(data = response.body()!!)
+                    } else
+                        BaseResponse.error(data = null, message = getErrorType(HttpException(response)))
+                } catch (e: Exception) {
+                    ALog.logError("Exception =  ${getErrorType(e)}")
+                    BaseResponse.error(data = null, message = getErrorType(e))
+                }
+            }
 
     fun getErrorType(e: Exception): NetworkErrorMassage {
         return when (e) {

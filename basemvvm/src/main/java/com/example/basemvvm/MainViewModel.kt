@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.basemvvm.network.ApiStatus
+import com.example.basemvvm.util.ALog
 import kotlinx.coroutines.launch
 
 
@@ -21,12 +23,21 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application, private val mMainRepository: MainRepository) : AndroidViewModel(application) {
 
-    fun rt(){
+    fun rt() {
         viewModelScope.launch {
-
+            ALog.logError("1213123")
+            val errr = mMainRepository.tttt()
+            ALog.logError("tt213131tt")
+            when (errr.status) {
+                ApiStatus.SUCCESS -> {
+                    ALog.logError("SUCCESS = " + (errr.data?.get(0)?.mAddr ?: ""))
+                }
+                ApiStatus.ERROR -> {
+                    ALog.logError("ERROR")
+                }
+            }
         }
     }
-
 
     class Factory(
             private val application: Application,

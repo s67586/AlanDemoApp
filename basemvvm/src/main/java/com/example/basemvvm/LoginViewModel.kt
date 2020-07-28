@@ -1,11 +1,10 @@
 package com.example.basemvvm
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.basemvvm.model.test
 import com.example.basemvvm.network.ApiStatus
+import com.example.basemvvm.network.BaseResponse
 import com.example.basemvvm.util.ALog
 import kotlinx.coroutines.launch
 
@@ -21,16 +20,19 @@ import kotlinx.coroutines.launch
  * Date         Author           Description
  ****************************************************/
 
-class MainViewModel(application: Application, private val mMainRepository: MainRepository) : AndroidViewModel(application) {
+class LoginViewModel(application: Application, private val mLoginRepository: LoginRepository) :
+        AndroidViewModel(application) {
+    var liveData: MutableLiveData<BaseResponse<test>> = MutableLiveData()
 
-    fun rt() {
+    fun callApi() {
         viewModelScope.launch {
             ALog.logError("1213123")
-            val errr = mMainRepository.tttt()
+            val errr = mLoginRepository.tttt()
             ALog.logError("tt213131tt")
             when (errr.status) {
                 ApiStatus.SUCCESS -> {
                     ALog.logError("SUCCESS = " + (errr.data?.get(0)?.mAddr ?: ""))
+                    liveData.postValue(errr)
                 }
                 ApiStatus.ERROR -> {
                     ALog.logError("ERROR")
@@ -41,10 +43,10 @@ class MainViewModel(application: Application, private val mMainRepository: MainR
 
     class Factory(
             private val application: Application,
-            private var mMainRepository: MainRepository
+            private var mLoginRepository: LoginRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MainViewModel(application, mMainRepository) as T
+            return LoginViewModel(application, mLoginRepository) as T
         }
     }
 }

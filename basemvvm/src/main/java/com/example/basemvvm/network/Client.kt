@@ -54,7 +54,6 @@ object Client {
                     if (response.isSuccessful) {
                         if (response.body() == null) {
                             if (T::class.java.simpleName == Unit.javaClass.simpleName)
-
                                 BaseResponse.success(data = response.body() as T)
                             else
                                 BaseResponse.error(data = null, message = getErrorType(IllegalArgumentException("content error")))

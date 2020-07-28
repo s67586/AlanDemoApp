@@ -19,12 +19,10 @@ import kotlinx.coroutines.withContext
  * Date         Author           Description
  ****************************************************/
 
-class MainRepository {
+class LoginRepository {
 
     suspend fun tttt(): BaseResponse<test> {
         return withContext(Dispatchers.IO) {
-            delay(2000)
-            ALog.logError("tttt")
             Client.safeApiCall { Client.apiService.callTest(hsn = "台北市", storeCd = "031123", town = "松山區") }
         }
     }

@@ -2,21 +2,22 @@ package com.example.basemvvm
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.basemvvm.base.BaseActivity
+import com.example.basemvvm.databinding.ActivityLoginBinding
 
-class MainActivity : BaseActivity<MainViewModel>() {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_main
+        return R.layout.activity_login
     }
 
     override fun getViewModelFactory(): ViewModelProvider.Factory? {
-        return MainViewModel.Factory(application, MainRepository())
+        return LoginViewModel.Factory(application, LoginRepository())
     }
 
     override fun initConfiguration() {
+        mViewDataBinding.viewModel = mViewModel
     }
 
     override fun observeLiveData() {
-        mViewModel.rt()
     }
 }

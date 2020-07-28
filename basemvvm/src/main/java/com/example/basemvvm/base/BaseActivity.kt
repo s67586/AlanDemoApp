@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.basemvvm.R
@@ -23,8 +25,9 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseActivity<T : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, T : ViewModel> : AppCompatActivity() {
 
+    lateinit var mViewDataBinding: B
     lateinit var mViewModel: T
     private var mFirstPressedTime: Long = 0
 
@@ -38,8 +41,9 @@ abstract class BaseActivity<T : ViewModel> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
         createViewModel(getViewModelFactory())
+        mViewDataBinding.lifecycleOwner = this
         initConfiguration()
         observeLiveData()
     }
@@ -47,11 +51,11 @@ abstract class BaseActivity<T : ViewModel> : AppCompatActivity() {
     open fun createViewModel(newInstanceFactory: ViewModelProvider.Factory?) {
         //獲得類的泛型的類型
         val type =
-            javaClass.genericSuperclass as ParameterizedType?
+                javaClass.genericSuperclass as ParameterizedType?
         if (type != null) {
             val actualTypeArguments =
-                type.actualTypeArguments
-            val tClass = actualTypeArguments[0] as Class<T>
+                    type.actualTypeArguments
+            val tClass = actualTypeArguments[1] as Class<T>
 
             mViewModel = if (newInstanceFactory != null) {
                 ViewModelProvider(this, newInstanceFactory).get(tClass)
@@ -66,9 +70,9 @@ abstract class BaseActivity<T : ViewModel> : AppCompatActivity() {
             exitApp()
         } else {
             GeneralTool().showToast(
-                this,
-                resources.getString(R.string.first_back_pressed),
-                Toast.LENGTH_SHORT
+                    this,
+                    resources.getString(R.string.first_back_pressed),
+                    Toast.LENGTH_SHORT
             )
             mFirstPressedTime = System.currentTimeMillis()
         }
@@ -81,9 +85,7 @@ abstract class BaseActivity<T : ViewModel> : AppCompatActivity() {
         home.addCategory(Intent.CATEGORY_HOME)
         startActivity(home)
 
-        val am =
-            baseContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-                ?: return
+        val am = baseContext.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         try {
             val appTasks = am.appTasks
             for (appTask in appTasks) {

@@ -29,7 +29,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : ViewModel> : AppCompatActiv
 
     lateinit var mViewDataBinding: B
     lateinit var mViewModel: T
-    private var mFirstPressedTime: Long = 0
 
     abstract fun getLayoutId(): Int
 
@@ -62,19 +61,6 @@ abstract class BaseActivity<B : ViewDataBinding, T : ViewModel> : AppCompatActiv
             } else {
                 ViewModelProvider(this).get(tClass)
             }
-        }
-    }
-
-    override fun onBackPressed() {
-        if (System.currentTimeMillis() - mFirstPressedTime < 2000) {
-            exitApp()
-        } else {
-            GeneralTool().showToast(
-                    this,
-                    resources.getString(R.string.first_back_pressed),
-                    Toast.LENGTH_SHORT
-            )
-            mFirstPressedTime = System.currentTimeMillis()
         }
     }
 

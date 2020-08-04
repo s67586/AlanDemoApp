@@ -91,4 +91,15 @@ dependencies {
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:$arch_version"
 
+    // Firebase核心
+    implementation 'com.google.firebase:firebase-core:17.4.4'
+    // Firebase Authentication (帳號驗證模組)
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    // Firebase Auth UI (第三方登入畫面模組)
+    implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
+    // Facebook軟體開發套件
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+
 }
+
+apply plugin: 'com.google.gms.google-services'

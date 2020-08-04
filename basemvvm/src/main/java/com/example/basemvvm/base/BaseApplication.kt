@@ -4,6 +4,13 @@ import android.app.ActivityManager
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.util.Base64
+import android.util.Log
+import android.widget.Toast
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import kotlin.properties.Delegates
 
 /****************************************************
@@ -27,6 +34,8 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        getHashKey()
     }
 
     fun exitApp() {
@@ -58,6 +67,27 @@ class BaseApplication : Application() {
             }
         } catch (e: SecurityException) {
             //CqrLog.debug(e);
+        }
+    }
+
+    private fun getHashKey() {
+        val info: PackageInfo
+        try {
+            info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES)
+            for (signature in info.signatures) {
+                var md: MessageDigest
+                md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val KeyResult = String(Base64.encode(md.digest(), 0)) //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("TAG", "hash key = $KeyResult")
+                Toast.makeText(this, "My FB Key is \n$KeyResult", Toast.LENGTH_LONG).show()
+            }
+        } catch (e1: PackageManager.NameNotFoundException) {
+            Log.e("TAG", "name not found$e1")
+        } catch (e: NoSuchAlgorithmException) {
+            Log.e("TAG", "no such an algorithm$e")
+        } catch (e: Exception) {
+            Log.e("TAG", "exception$e")
         }
     }
 }

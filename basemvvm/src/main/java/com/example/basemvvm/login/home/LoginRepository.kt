@@ -1,4 +1,4 @@
-package com.example.basemvvm
+package com.example.basemvvm.login.home
 
 import com.example.basemvvm.model.test
 import com.example.basemvvm.network.BaseResponse
@@ -21,9 +21,5 @@ import kotlinx.coroutines.withContext
 
 class LoginRepository {
 
-    suspend fun tttt(): BaseResponse<test> {
-        return withContext(Dispatchers.IO) {
-            Client.safeApiCall { Client.apiService.callTest(hsn = "台北市", storeCd = "031123", town = "松山區") }
-        }
-    }
+
 }

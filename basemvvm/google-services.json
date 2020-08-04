@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "790380700589",
+    "firebase_url": "https://alandemo-4875c.firebaseio.com",
+    "project_id": "alandemo-4875c",
+    "storage_bucket": "alandemo-4875c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790380700589:android:a7e4abe02e08c5c793b724",
+        "android_client_info": {
+          "package_name": "com.example.basemvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790380700589-ec7ba10ad6un0vqmdt79mithu16gu25m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.basemvvm",
+            "certificate_hash": "712041a7782c20bb5a2480d322f38c1800599157"
+          }
+        },
+        {
+          "client_id": "790380700589-730ahra7gljbhkhtpij1jmv1l844jqv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqZa5hasvYtbWcgR1eQ-ERMdcfjZq9_Aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790380700589-730ahra7gljbhkhtpij1jmv1l844jqv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

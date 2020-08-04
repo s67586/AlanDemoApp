@@ -1,4 +1,4 @@
-package com.example.basemvvm
+package com.example.basemvvm.login
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -6,6 +6,7 @@ import com.example.basemvvm.model.test
 import com.example.basemvvm.network.ApiStatus
 import com.example.basemvvm.network.BaseResponse
 import com.example.basemvvm.util.ALog
+import com.facebook.CallbackManager
 import kotlinx.coroutines.launch
 
 
@@ -20,14 +21,17 @@ import kotlinx.coroutines.launch
  * Date         Author           Description
  ****************************************************/
 
-class LoginViewModel(application: Application, private val mLoginRepository: LoginRepository) :
+class LoginMainViewModel(application: Application, private val mLoginMainRepository: LoginMainRepository) :
         AndroidViewModel(application) {
+
     var liveData: MutableLiveData<BaseResponse<test>> = MutableLiveData()
+    var mFacebookCallbackManager: CallbackManager = CallbackManager.Factory.create()
+
 
     fun callApi() {
         viewModelScope.launch {
             ALog.logError("1213123")
-            val errr = mLoginRepository.tttt()
+            val errr = mLoginMainRepository.tttt()
             ALog.logError("tt213131tt")
             when (errr.status) {
                 ApiStatus.SUCCESS -> {
@@ -43,10 +47,10 @@ class LoginViewModel(application: Application, private val mLoginRepository: Log
 
     class Factory(
             private val application: Application,
-            private var mLoginRepository: LoginRepository
+            private var mLoginMainRepository: LoginMainRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return LoginViewModel(application, mLoginRepository) as T
+            return LoginMainViewModel(application, mLoginMainRepository) as T
         }
     }
 }

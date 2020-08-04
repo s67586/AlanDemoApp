@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    tools:ignore="UnusedNavigation"
+    app:startDestination="@id/AFragment">
+    <fragment
+        android:id="@+id/AFragment"
+        android:name="com.example.basemvvm.login.home.LoginFragment"
+        android:label="AFragment" >
+        <action
+            android:id="@+id/action_AFragment_to_BFragment"
+            app:destination="@id/BFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/BFragment"
+        android:name="com.example.basemvvm.login.BFragment"
+        android:label="BFragment" />
+</navigation>

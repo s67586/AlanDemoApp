@@ -22,12 +22,15 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding, AT : ViewModel, T : ViewModel> : Fragment() {
 
     lateinit var mViewDataBinding: B
+    lateinit var mActivityViewModel: AT
     lateinit var mViewModel: T
 
     abstract fun getLayoutId(): Int
+
+    abstract fun getActivityViewModelFactory(): ViewModelProvider.Factory?
 
     abstract fun getViewModelFactory(): ViewModelProvider.Factory?
 
@@ -38,10 +41,33 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root: View = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(container!!.context), getLayoutId(), container, false).root
         mViewDataBinding = DataBindingUtil.bind(root)!!
+        createActivityViewModel(getActivityViewModelFactory())
         createViewModel(getViewModelFactory())
         mViewDataBinding.lifecycleOwner = this
-        initConfiguration()
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initConfiguration()
+        observeLiveData()
+    }
+
+    open fun createActivityViewModel(newInstanceFactory: ViewModelProvider.Factory?) {
+        //獲得類的泛型的類型
+        val type =
+                javaClass.genericSuperclass as ParameterizedType?
+        if (type != null) {
+            val actualTypeArguments =
+                    type.actualTypeArguments
+            val tClass = actualTypeArguments[1] as Class<AT>
+
+            mActivityViewModel = if (newInstanceFactory != null) {
+                ViewModelProvider(requireActivity(), newInstanceFactory).get(tClass)
+            } else {
+                ViewModelProvider(requireActivity()).get(tClass)
+            }
+        }
     }
 
     open fun createViewModel(newInstanceFactory: ViewModelProvider.Factory?) {
@@ -51,12 +77,12 @@ abstract class BaseFragment<B : ViewDataBinding, T : ViewModel> : Fragment() {
         if (type != null) {
             val actualTypeArguments =
                     type.actualTypeArguments
-            val tClass = actualTypeArguments[1] as Class<T>
+            val tClass = actualTypeArguments[2] as Class<T>
 
             mViewModel = if (newInstanceFactory != null) {
-                ViewModelProvider(requireActivity(), newInstanceFactory).get(tClass)
+                ViewModelProvider(this, newInstanceFactory).get(tClass)
             } else {
-                ViewModelProvider(requireActivity()).get(tClass)
+                ViewModelProvider(this).get(tClass)
             }
         }
     }

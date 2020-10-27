@@ -6,10 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.basemvvm.R
-import com.example.basemvvm.base.BaseFragment
 import com.example.basemvvm.databinding.FragmentLoginBinding
-import com.example.basemvvm.login.LoginMainRepository
-import com.example.basemvvm.login.LoginMainViewModel
+import com.example.basemvvm.login.RegisterLoginMainRepository
+import com.example.basemvvm.login.RegisterLoginMainViewModel
 import com.example.basemvvm.util.ALog
 import com.facebook.AccessToken
 import com.facebook.FacebookCallback
@@ -21,7 +20,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.fragment_login.*
 
 /****************************************************
  * Copyright (C) 雲端互動 Corporation. All rights reserved.
@@ -34,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
  * Date         Author           Description
  ****************************************************/
 
-class LoginFragment : BaseFragment<FragmentLoginBinding, LoginMainViewModel, LoginViewModel>() {
+class LoginFragment : BaseFragment<FragmentLoginBinding, RegisterLoginMainViewModel, LoginViewModel>() {
     companion object {
         const val GOOGLE_SIGN_IN = 12333;
     }
@@ -46,7 +44,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginMainViewModel, Log
     }
 
     override fun getActivityViewModelFactory(): ViewModelProvider.Factory? {
-        return LoginMainViewModel.Factory(requireActivity().application, LoginMainRepository())
+        return RegisterLoginMainViewModel.Factory(requireActivity().application, RegisterLoginMainRepository())
     }
 
     override fun getViewModelFactory(): ViewModelProvider.Factory? {
@@ -72,7 +70,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginMainViewModel, Log
             }
         })
 
-       
+
         navigate_btn2.setOnClickListener {
             startActivityForResult(GoogleSignIn.getClient(requireActivity(), GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.google_web_client_id))
@@ -120,9 +118,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginMainViewModel, Log
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        ALog.logError("signInWithCredential:failure${task.exception}")
-                        Toast.makeText(requireContext(), "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
+                        ALog.logError("signInWithCredential:failure = ${task.exception}")
+                        Toast.makeText(requireContext(), "Authentication failed : ${task.exception}", Toast.LENGTH_SHORT).show()
                         mViewModel.mFireBaseUserLiveData.postValue(null)
                     }
                 }
@@ -140,10 +137,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginMainViewModel, Log
                         navController.navigate(R.id.action_AFragment_to_BFragment)
                     } else {
                         // If sign in fails, display a message to the user.
-                        ALog.logError("signInWithCredential:failure${task.exception}")
+                        ALog.logError("signInWithCredential:failure = ${task.exception}")
                         // ...
-                        Toast.makeText(requireContext(), "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Authentication failed : ${task.exception}", Toast.LENGTH_SHORT).show()
                         mViewModel.mFireBaseUserLiveData.postValue(null)
                     }
 

@@ -15,8 +15,6 @@ import com.example.basemvvm.util.GeneralTool
 import java.lang.reflect.ParameterizedType
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/4/24
  * Usage:
@@ -25,10 +23,10 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseActivity<B : ViewDataBinding, T : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
     lateinit var mViewDataBinding: B
-    lateinit var mViewModel: T
+    lateinit var mViewModel: VM
 
     abstract fun getLayoutId(): Int
 
@@ -54,7 +52,7 @@ abstract class BaseActivity<B : ViewDataBinding, T : ViewModel> : AppCompatActiv
         if (type != null) {
             val actualTypeArguments =
                     type.actualTypeArguments
-            val tClass = actualTypeArguments[1] as Class<T>
+            val tClass = actualTypeArguments[1] as Class<VM>
 
             mViewModel = if (newInstanceFactory != null) {
                 ViewModelProvider(this, newInstanceFactory).get(tClass)

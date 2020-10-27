@@ -11,8 +11,6 @@ import kotlinx.coroutines.launch
 
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/7/21
  * Usage:
@@ -21,7 +19,7 @@ import kotlinx.coroutines.launch
  * Date         Author           Description
  ****************************************************/
 
-class LoginMainViewModel(application: Application, private val mLoginMainRepository: LoginMainRepository) :
+class RegisterLoginMainViewModel(application: Application, private val mRegisterLoginMainRepository: RegisterLoginMainRepository) :
         AndroidViewModel(application) {
 
     var liveData: MutableLiveData<BaseResponse<test>> = MutableLiveData()
@@ -31,7 +29,7 @@ class LoginMainViewModel(application: Application, private val mLoginMainReposit
     fun callApi() {
         viewModelScope.launch {
             ALog.logError("1213123")
-            val errr = mLoginMainRepository.tttt()
+            val errr = mRegisterLoginMainRepository.tttt()
             ALog.logError("tt213131tt")
             when (errr.status) {
                 ApiStatus.SUCCESS -> {
@@ -47,10 +45,10 @@ class LoginMainViewModel(application: Application, private val mLoginMainReposit
 
     class Factory(
             private val application: Application,
-            private var mLoginMainRepository: LoginMainRepository
+            private var mRegisterLoginMainRepository: RegisterLoginMainRepository
     ) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return LoginMainViewModel(application, mLoginMainRepository) as T
+            return RegisterLoginMainViewModel(application, mRegisterLoginMainRepository) as T
         }
     }
 }

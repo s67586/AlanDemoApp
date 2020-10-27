@@ -16,8 +16,6 @@ import java.util.*
 
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/5/3
  * Usage:

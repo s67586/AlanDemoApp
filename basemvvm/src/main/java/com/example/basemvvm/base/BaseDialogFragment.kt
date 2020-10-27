@@ -4,8 +4,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/5/13
  * Usage:

@@ -6,8 +6,6 @@ import android.text.TextUtils
 import com.example.basemvvm.base.BaseApplication
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/4/30
  * Usage:

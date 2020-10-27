@@ -9,8 +9,6 @@ import com.google.firebase.auth.FirebaseUser
 
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/7/21
  * Usage:

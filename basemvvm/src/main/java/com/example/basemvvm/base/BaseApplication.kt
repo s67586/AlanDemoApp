@@ -9,13 +9,13 @@ import android.content.pm.PackageManager
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import com.example.basemvvm.BuildConfig
+import com.facebook.stetho.Stetho
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import kotlin.properties.Delegates
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/4/30
  * Usage:
@@ -34,7 +34,10 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-
+        // Stetho Init
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this)
+        }
         getHashKey()
     }
 

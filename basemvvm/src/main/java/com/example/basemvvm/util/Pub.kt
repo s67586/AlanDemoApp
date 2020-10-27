@@ -1,8 +1,6 @@
 package com.example.basemvvm.util
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/4/30
  * Usage:

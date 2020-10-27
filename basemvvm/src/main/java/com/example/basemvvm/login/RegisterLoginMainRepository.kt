@@ -9,8 +9,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/7/21
  * Usage:
@@ -19,7 +17,7 @@ import kotlinx.coroutines.withContext
  * Date         Author           Description
  ****************************************************/
 
-class LoginMainRepository {
+class RegisterLoginMainRepository {
 
     suspend fun tttt(): BaseResponse<test> {
         return withContext(Dispatchers.IO) {

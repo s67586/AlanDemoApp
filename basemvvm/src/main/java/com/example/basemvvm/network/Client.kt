@@ -23,8 +23,6 @@ object Client {
     private const val ERROR_KEY = "error"
 
     init {
-        val logInterceptor = HttpLoggingInterceptor(HttpLogger())
-        logInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor {
                     val requestBuilder = it.request().newBuilder()
@@ -35,7 +33,6 @@ object Client {
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
-                .addNetworkInterceptor(logInterceptor)
                 .build()
 
         val retrofit = Retrofit.Builder()

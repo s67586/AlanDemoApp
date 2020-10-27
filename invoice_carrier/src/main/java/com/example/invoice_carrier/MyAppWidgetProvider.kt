@@ -8,8 +8,6 @@ import android.util.Log
 import android.widget.RemoteViews
 
 /****************************************************
- * Copyright (C) Alan Corporation. All rights reserved.
- *
  * Author: AlanLai
  * Create Date: 2020/7/13
  * Usage:

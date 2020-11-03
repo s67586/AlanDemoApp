@@ -2,17 +2,17 @@ package com.example.basemvvm.network
 
 import com.example.basemvvm.BuildConfig
 import com.example.basemvvm.util.ALog
-import kotlinx.coroutines.*
+import com.facebook.stetho.okhttp3.StethoInterceptor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
-import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-import java.lang.IllegalArgumentException
 import java.net.SocketTimeoutException
 import java.util.concurrent.TimeUnit
 
@@ -30,6 +30,7 @@ object Client {
                             .url(it.request().url)
                     it.proceed(requestBuilder.build())
                 }
+                .addNetworkInterceptor(StethoInterceptor())
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
@@ -48,19 +49,20 @@ object Client {
             withContext(Dispatchers.IO) {
                 try {
                     val response = callFunction.invoke()
+                    ALog.e(response.toString())
                     if (response.isSuccessful) {
                         if (response.body() == null) {
                             if (T::class.java.simpleName == Unit.javaClass.simpleName)
-                                BaseResponse.success(data = response.body() as T)
+                                BaseResponse.Success(data = response.body() as T)
                             else
-                                BaseResponse.error(data = null, message = getErrorType(IllegalArgumentException("content error")))
+                                BaseResponse.Error(errorMassage  = getErrorType(IllegalArgumentException("content error")))
                         } else
-                            BaseResponse.success(data = response.body()!!)
+                            BaseResponse.Success(data = response.body()!!)
                     } else
-                        BaseResponse.error(data = null, message = getErrorType(HttpException(response)))
+                        BaseResponse.Error( errorMassage = getErrorType(HttpException(response)))
                 } catch (e: Exception) {
                     ALog.logError("Exception =  ${getErrorType(e)}")
-                    BaseResponse.error(data = null, message = getErrorType(e))
+                    BaseResponse.Error(errorMassage = getErrorType(e))
                 }
             }
 

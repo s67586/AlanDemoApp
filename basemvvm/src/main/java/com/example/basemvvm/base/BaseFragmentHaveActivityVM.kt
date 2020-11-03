@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.ParameterizedType
@@ -19,11 +20,11 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseFragmentHaveActivityVM<B : ViewDataBinding, AVM : ViewModel, VM : ViewModel> : BaseFragment<B, VM>() {
+abstract class BaseFragmentHaveActivityVM<B : ViewDataBinding, AVM : AndroidViewModel, VM : AndroidViewModel> : BaseFragment<B, VM>() {
 
     lateinit var mActivityViewModel: AVM
 
-    abstract fun getActivityViewModelFactory(): ViewModelProvider.Factory?
+    open fun getActivityViewModelFactory(): ViewModelProvider.Factory? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root: View = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(container!!.context), getLayoutId(), container, false).root

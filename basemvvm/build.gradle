@@ -3,6 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -27,7 +30,8 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
-            buildConfigField "String", "HOST", "\"https://3000.gov.tw/hpgapi-openmap/\""
+            buildConfigField "String", "HOST", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "TMDB_API_KEY", properties.getProperty("tmdb_api_key")
         }
     }
 
@@ -92,6 +96,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$arch_version"
     // Stetho
     debugImplementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
 
     // Firebase核心
     implementation 'com.google.firebase:firebase-core:17.5.1'

@@ -1,14 +1,13 @@
 package com.example.basemvvm.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import java.lang.reflect.ParameterizedType
@@ -22,7 +21,7 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : AndroidViewModel> : Fragment() {
 
     lateinit var mViewDataBinding: B
     lateinit var mViewModel: VM
@@ -30,13 +29,13 @@ abstract class BaseFragment<B : ViewDataBinding, VM : ViewModel> : Fragment() {
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModelFactory(): ViewModelProvider.Factory?
-
     abstract fun initConfiguration()
 
     abstract fun initListener()
 
     abstract fun observeLiveData()
+
+    open fun getViewModelFactory(): ViewModelProvider.Factory? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root: View = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(container!!.context), getLayoutId(), container, false).root

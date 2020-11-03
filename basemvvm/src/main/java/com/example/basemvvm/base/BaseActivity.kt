@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.basemvvm.R
@@ -23,18 +24,20 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, VM : AndroidViewModel> : AppCompatActivity() {
 
     lateinit var mViewDataBinding: B
     lateinit var mViewModel: VM
 
     abstract fun getLayoutId(): Int
 
-    abstract fun getViewModelFactory(): ViewModelProvider.Factory?
-
     abstract fun initConfiguration()
 
+    abstract fun initListener()
+
     abstract fun observeLiveData()
+
+    open fun getViewModelFactory(): ViewModelProvider.Factory? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,7 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActi
         createViewModel(getViewModelFactory())
         mViewDataBinding.lifecycleOwner = this
         initConfiguration()
+        initListener()
         observeLiveData()
     }
 

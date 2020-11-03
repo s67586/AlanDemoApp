@@ -9,9 +9,8 @@ package com.example.basemvvm.network
  * Date         Author           Description
  ****************************************************/
 
-data class BaseResponse<out T>(val status: ApiStatus, val data: T?, val message: NetworkErrorMassage?) {
-    companion object {
-        fun <T> success(data: T): BaseResponse<T> = BaseResponse(status = ApiStatus.SUCCESS, data = data, message = null)
-        fun <T> error(data: T?, message: NetworkErrorMassage?): BaseResponse<T> = BaseResponse(status = ApiStatus.ERROR, data = data, message = message)
-    }
+sealed class BaseResponse<out T> {
+
+    data class Success<out T>(val data: T) : BaseResponse<T>()
+    data class Error(val errorMassage: NetworkErrorMassage) : BaseResponse<Nothing>()
 }

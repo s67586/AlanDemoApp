@@ -1,8 +1,4 @@
 <resources>
     <string name="app_name">BaseMvvm</string>
-    <string name="facebook_app_id">744087883051193</string>
-    <string name="facebook_application_id">744087883051193</string>
-    <string name="fb_login_protocol_scheme">fb744087883051193</string>
-    <string name="google_web_client_id">790380700589-730ahra7gljbhkhtpij1jmv1l844jqv3.apps.googleusercontent.com</string>
     <string name="first_back_pressed">再按一次退出APP</string>
 </resources>

@@ -12,7 +12,7 @@ import com.example.basemvvm.model.ResponseMovieNowPlayingModel
  ****************************************************/
 
 object ApiManager {
-    suspend fun getNowPlaying(): BaseResponse<ResponseMovieNowPlayingModel> {
-        return Client.safeApiCall { Client.apiService.getNowPlaying() }
+    suspend fun getNowPlaying(page: Int = 1): BaseResponse<ResponseMovieNowPlayingModel> {
+        return Client.safeApiCall { Client.apiService.getNowPlaying(mPage = page) }
     }
 }

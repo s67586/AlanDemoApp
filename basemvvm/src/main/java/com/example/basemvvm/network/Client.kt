@@ -24,16 +24,18 @@ object Client {
 
     init {
         val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor {
-                    val requestBuilder = it.request().newBuilder()
-                            .addHeader("Content-Type", "application/json")
-                            .url(it.request().url)
-                    it.proceed(requestBuilder.build())
+                .apply {
+                    addInterceptor {
+                        val requestBuilder = it.request().newBuilder()
+                                .addHeader("Content-Type", "application/json")
+                                .url(it.request().url)
+                        it.proceed(requestBuilder.build())
+                    }
+                    addNetworkInterceptor(StethoInterceptor())
+                    connectTimeout(60, TimeUnit.SECONDS)
+                    readTimeout(60, TimeUnit.SECONDS)
+                    writeTimeout(60, TimeUnit.SECONDS)
                 }
-                .addNetworkInterceptor(StethoInterceptor())
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
                 .build()
 
         val retrofit = Retrofit.Builder()
@@ -55,11 +57,11 @@ object Client {
                             if (T::class.java.simpleName == Unit.javaClass.simpleName)
                                 BaseResponse.Success(data = response.body() as T)
                             else
-                                BaseResponse.Error(errorMassage  = getErrorType(IllegalArgumentException("content error")))
+                                BaseResponse.Error(errorMassage = getErrorType(IllegalArgumentException("content error")))
                         } else
                             BaseResponse.Success(data = response.body()!!)
                     } else
-                        BaseResponse.Error( errorMassage = getErrorType(HttpException(response)))
+                        BaseResponse.Error(errorMassage = getErrorType(HttpException(response)))
                 } catch (e: Exception) {
                     ALog.logError("Exception =  ${getErrorType(e)}")
                     BaseResponse.Error(errorMassage = getErrorType(e))

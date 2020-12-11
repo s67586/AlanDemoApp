@@ -1,9 +1,6 @@
 package com.example.basemvvm.interview
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 
 /****************************************************
  * Author: alanlai
@@ -14,6 +11,6 @@ import androidx.lifecycle.ViewModelProvider
  * Date         Author           Description
  ****************************************************/
 
-class InterviewViewModel(val mApplication: Application) : AndroidViewModel(mApplication) {
+class InterviewViewModel : ViewModel() {
 
 }

@@ -21,10 +21,9 @@ import java.lang.reflect.ParameterizedType
  * Date         Author           Description
  ****************************************************/
 
-abstract class BaseFragment<B : ViewDataBinding, VM : AndroidViewModel> : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
     lateinit var mViewDataBinding: B
-    lateinit var mViewModel: VM
     val mNavController by lazy { NavHostFragment.findNavController(this) }
 
     abstract fun getLayoutId(): Int
@@ -40,7 +39,6 @@ abstract class BaseFragment<B : ViewDataBinding, VM : AndroidViewModel> : Fragme
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root: View = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(container!!.context), getLayoutId(), container, false).root
         mViewDataBinding = DataBindingUtil.bind(root)!!
-        createViewModel(getViewModelFactory())
         mViewDataBinding.lifecycleOwner = this
         return root
     }
@@ -50,22 +48,5 @@ abstract class BaseFragment<B : ViewDataBinding, VM : AndroidViewModel> : Fragme
         initConfiguration()
         initListener()
         observeLiveData()
-    }
-
-    open fun createViewModel(newInstanceFactory: ViewModelProvider.Factory?) {
-        //獲得類的泛型的類型
-        val type =
-                javaClass.genericSuperclass as ParameterizedType?
-        if (type != null) {
-            val actualTypeArguments =
-                    type.actualTypeArguments
-            val tClass = actualTypeArguments[1] as Class<VM>
-
-            mViewModel = if (newInstanceFactory != null) {
-                ViewModelProvider(this, newInstanceFactory).get(tClass)
-            } else {
-                ViewModelProvider(this).get(tClass)
-            }
-        }
     }
 }

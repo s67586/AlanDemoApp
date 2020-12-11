@@ -1,7 +1,7 @@
 package com.example.basemvvm.interview.c
 
 import com.example.basemvvm.R
-import com.example.basemvvm.base.BaseFragmentHaveActivityVM
+import com.example.basemvvm.base.BaseFragment
 import com.example.basemvvm.databinding.FragmentABinding
 import com.example.basemvvm.interview.InterviewViewModel
 
@@ -14,7 +14,7 @@ import com.example.basemvvm.interview.InterviewViewModel
  * Date         Author           Description
  ****************************************************/
 
-class InterviewCFragment : BaseFragmentHaveActivityVM<FragmentABinding, InterviewViewModel, InterviewCViewModel>() {
+class InterviewCFragment : BaseFragment<FragmentABinding>() {
     override fun getLayoutId(): Int {
         return R.layout.fragment_c
     }

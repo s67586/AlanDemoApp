@@ -3,10 +3,9 @@ package com.example.basemvvm.interview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.basemvvm.databinding.TestViewHolderBinding
 import com.example.basemvvm.model.ResponsePhotosModel
-import kotlinx.android.synthetic.main.test_view_holder.view.*
+import com.example.basemvvm.model.ResponsePhotosModelItem
 
 
 /****************************************************
@@ -18,14 +17,17 @@ import kotlinx.android.synthetic.main.test_view_holder.view.*
  * Date         Author           Description
  ****************************************************/
 
-class PhotosAdapter(private val mDataList: ArrayList<ResponsePhotosModel.ResponsePhotosModelItem>) : RecyclerView.Adapter<PhotosAdapter.TestViewHolder>() {
+class PhotosAdapter(private val mDataList: ArrayList<ResponsePhotosModelItem>, private val mTestViewHolderCallBack: TestViewHolderCallBack)
+    : RecyclerView.Adapter<PhotosAdapter.TestViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
         return TestViewHolder(TestViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
         holder.bind(mDataList[position])
-
+        holder.itemView.setOnClickListener {
+            mTestViewHolderCallBack.onItemClick(mDataList[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -33,11 +35,15 @@ class PhotosAdapter(private val mDataList: ArrayList<ResponsePhotosModel.Respons
     }
 
     class TestViewHolder(private val mBinding: TestViewHolderBinding) : RecyclerView.ViewHolder(mBinding.root) {
-        fun bind(data: ResponsePhotosModel.ResponsePhotosModelItem) {
+        fun bind(data: ResponsePhotosModelItem) {
             mBinding.model = data
             mBinding.executePendingBindings()
         }
     }
+}
+
+interface TestViewHolderCallBack {
+    fun onItemClick(responsePhotosModelItem: ResponsePhotosModelItem)
 }
 
 

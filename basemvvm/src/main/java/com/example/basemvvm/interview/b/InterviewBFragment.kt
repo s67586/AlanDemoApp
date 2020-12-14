@@ -7,6 +7,8 @@ import com.example.basemvvm.base.BaseFragment
 import com.example.basemvvm.databinding.FragmentBBinding
 import com.example.basemvvm.interview.InterviewViewModel
 import com.example.basemvvm.interview.PhotosAdapter
+import com.example.basemvvm.interview.TestViewHolderCallBack
+import com.example.basemvvm.model.ResponsePhotosModelItem
 import kotlinx.android.synthetic.main.fragment_b.*
 
 /****************************************************
@@ -18,9 +20,9 @@ import kotlinx.android.synthetic.main.fragment_b.*
  * Date         Author           Description
  ****************************************************/
 
-class InterviewBFragment : BaseFragment<FragmentBBinding>() {
+class InterviewBFragment : BaseFragment<FragmentBBinding>(), TestViewHolderCallBack {
 
-    val activityViewModel by activityViewModels<InterviewViewModel>()
+    private val activityViewModel by activityViewModels<InterviewViewModel>()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_b
@@ -28,12 +30,18 @@ class InterviewBFragment : BaseFragment<FragmentBBinding>() {
 
     override fun initConfiguration() {
         fragmentB_recyclerView.layoutManager = GridLayoutManager(context, 4)
-        fragmentB_recyclerView.adapter = PhotosAdapter(activityViewModel.photosList)
+        fragmentB_recyclerView.adapter = PhotosAdapter(activityViewModel.photosList, this)
     }
 
     override fun initListener() {
     }
 
     override fun observeLiveData() {
+    }
+
+    override fun onItemClick(responsePhotosModelItem: ResponsePhotosModelItem) {
+     val aaa =   InterviewBFragmentDirections.actionBFragmentToCFragment(itemModel = responsePhotosModelItem)
+
+        mNavController.navigate(aaa)
     }
 }

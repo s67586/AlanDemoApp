@@ -2,7 +2,7 @@ package com.example.basemvvm.interview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.basemvvm.model.ResponsePhotosModel
+import com.example.basemvvm.model.ResponsePhotosModelItem
 import com.example.basemvvm.network.ApiManager
 import com.example.basemvvm.network.BaseResponse
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
  ****************************************************/
 
 class InterviewViewModel : ViewModel() {
-   lateinit var photosList :ArrayList<ResponsePhotosModel.ResponsePhotosModelItem>
+   lateinit var photosList :ArrayList<ResponsePhotosModelItem>
     fun getPhotos(){
         viewModelScope.launch {
             ApiManager.getPhotos().apply {

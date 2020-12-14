@@ -29,5 +29,9 @@
     <fragment
         android:id="@+id/CFragment"
         android:name="com.example.basemvvm.interview.c.InterviewCFragment"
-        android:label="BFragment" />
+        android:label="BFragment" >
+        <argument
+            android:name="itemModel"
+            app:argType="com.example.basemvvm.model.ResponsePhotosModelItem"/>
+    </fragment>
 </navigation>

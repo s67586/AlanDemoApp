@@ -2,9 +2,11 @@ package com.example.basemvvm.model
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class ResponsePhotosModel : ArrayList<ResponsePhotosModel.ResponsePhotosModelItem>(){
-    data class ResponsePhotosModelItem(
+class ResponsePhotosModel : ArrayList<ResponsePhotosModelItem>()
+
+data class ResponsePhotosModelItem(
         @SerializedName("albumId")
         val mAlbumId: Int,
         @SerializedName("id")
@@ -15,5 +17,4 @@ class ResponsePhotosModel : ArrayList<ResponsePhotosModel.ResponsePhotosModelIte
         val mTitle: String,
         @SerializedName("url")
         val mUrl: String
-    )
-}
+):Serializable

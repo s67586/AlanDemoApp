@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.basemvvm.model.ResponsePhotosModel.ResponsePhotosModelItem" />
+            type="com.example.basemvvm.model.ResponsePhotosModelItem" />
 
     </data>
 

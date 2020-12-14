@@ -1,9 +1,9 @@
 package com.example.basemvvm.interview.c
 
+import androidx.navigation.fragment.navArgs
 import com.example.basemvvm.R
 import com.example.basemvvm.base.BaseFragment
-import com.example.basemvvm.databinding.FragmentABinding
-import com.example.basemvvm.interview.InterviewViewModel
+import com.example.basemvvm.databinding.FragmentCBinding
 
 /****************************************************
  * Author: alanlai
@@ -14,12 +14,14 @@ import com.example.basemvvm.interview.InterviewViewModel
  * Date         Author           Description
  ****************************************************/
 
-class InterviewCFragment : BaseFragment<FragmentABinding>() {
+class InterviewCFragment : BaseFragment<FragmentCBinding>() {
+    val args: InterviewCFragmentArgs by navArgs()
     override fun getLayoutId(): Int {
         return R.layout.fragment_c
     }
 
     override fun initConfiguration() {
+        mViewDataBinding.itemModel = args.itemModel
     }
 
     override fun initListener() {

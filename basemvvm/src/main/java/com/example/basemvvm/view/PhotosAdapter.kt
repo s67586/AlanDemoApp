@@ -1,10 +1,9 @@
-package com.example.basemvvm.interview
+package com.example.basemvvm.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basemvvm.databinding.TestViewHolderBinding
-import com.example.basemvvm.model.ResponsePhotosModel
 import com.example.basemvvm.model.ResponsePhotosModelItem
 
 

@@ -1,4 +1,4 @@
-package com.example.basemvvm.interview
+package com.example.basemvvm.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

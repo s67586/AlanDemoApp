@@ -1,4 +1,4 @@
-package com.example.basemvvm.interview.c
+package com.example.basemvvm.view.c
 
 import androidx.navigation.fragment.navArgs
 import com.example.basemvvm.R

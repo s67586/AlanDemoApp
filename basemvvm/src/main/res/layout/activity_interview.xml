@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.basemvvm.interview.InterviewViewModel" />
+            type="com.example.basemvvm.view.InterviewViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

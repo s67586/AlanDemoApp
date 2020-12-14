@@ -1,4 +1,4 @@
-package com.example.basemvvm.interview.c
+package com.example.basemvvm.view.b
 
 import androidx.lifecycle.ViewModel
 
@@ -11,5 +11,5 @@ import androidx.lifecycle.ViewModel
  * Date         Author           Description
  ****************************************************/
 
-class InterviewCViewModel: ViewModel(){
+class InterviewBViewModel: ViewModel() {
 }

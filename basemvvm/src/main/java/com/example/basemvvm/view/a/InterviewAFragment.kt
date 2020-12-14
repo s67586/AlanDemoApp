@@ -1,4 +1,4 @@
-package com.example.basemvvm.interview.a
+package com.example.basemvvm.view.a
 
 import com.example.basemvvm.R
 import com.example.basemvvm.base.BaseFragment

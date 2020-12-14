@@ -1,4 +1,4 @@
-package com.example.basemvvm.interview
+package com.example.basemvvm.view
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -6,7 +6,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.example.basemvvm.R
-import com.example.basemvvm.util.ALog
 
 
 /****************************************************

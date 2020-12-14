@@ -7,7 +7,7 @@
     app:startDestination="@id/AFragment">
     <fragment
         android:id="@+id/AFragment"
-        android:name="com.example.basemvvm.interview.a.InterviewAFragment"
+        android:name="com.example.basemvvm.view.a.InterviewAFragment"
         android:label="AFragment" >
         <action
             android:id="@+id/action_AFragment_to_BFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/BFragment"
-        android:name="com.example.basemvvm.interview.b.InterviewBFragment"
+        android:name="com.example.basemvvm.view.b.InterviewBFragment"
         android:label="BFragment" >
         <action
             android:id="@+id/action_BFragment_to_CFragment"
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/CFragment"
-        android:name="com.example.basemvvm.interview.c.InterviewCFragment"
+        android:name="com.example.basemvvm.view.c.InterviewCFragment"
         android:label="BFragment" >
         <argument
             android:name="itemModel"

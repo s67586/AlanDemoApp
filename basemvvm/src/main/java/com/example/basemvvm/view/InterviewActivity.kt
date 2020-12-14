@@ -1,9 +1,6 @@
-package com.example.basemvvm.interview
+package com.example.basemvvm.view
 
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.basemvvm.R
 import com.example.basemvvm.base.BaseActivity
 import com.example.basemvvm.databinding.ActivityInterviewBinding

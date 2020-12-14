@@ -1,7 +1,5 @@
 package com.example.basemvvm.interview.a
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 
 /****************************************************

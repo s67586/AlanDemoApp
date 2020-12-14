@@ -1,6 +1,6 @@
 package com.example.basemvvm.network
 
-import com.example.basemvvm.model.ResponseMovieNowPlayingModel
+import com.example.basemvvm.model.ResponsePhotosModel
 
 /****************************************************
  * Author: alanlai
@@ -12,7 +12,7 @@ import com.example.basemvvm.model.ResponseMovieNowPlayingModel
  ****************************************************/
 
 object ApiManager {
-    suspend fun getNowPlaying(page: Int = 1): BaseResponse<ResponseMovieNowPlayingModel> {
-        return Client.safeApiCall { Client.apiService.getNowPlaying(mPage = page) }
+    suspend fun getPhotos(): BaseResponse<ResponsePhotosModel> {
+        return Client.safeApiCall { Client.apiService.getPhotos() }
     }
 }

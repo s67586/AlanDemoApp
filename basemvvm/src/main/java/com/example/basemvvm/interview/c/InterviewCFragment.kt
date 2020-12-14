@@ -20,14 +20,11 @@ class InterviewCFragment : BaseFragment<FragmentABinding>() {
     }
 
     override fun initConfiguration() {
-        TODO("Not yet implemented")
     }
 
     override fun initListener() {
-        TODO("Not yet implemented")
     }
 
     override fun observeLiveData() {
-        TODO("Not yet implemented")
     }
 }

@@ -38,8 +38,8 @@ class GeneralTool {
             val toast = Toast.makeText(context, msg, duration)
             val viewId =
                 Resources.getSystem().getIdentifier("message", "id", "android")
-            val textView = toast.view.findViewById<TextView>(viewId)
-            textView.textSize = 18f
+            val textView = toast.view?.findViewById<TextView>(viewId)
+            textView?.textSize = 18f
             toast.show()
             time = System.currentTimeMillis()
         } else {
@@ -48,8 +48,8 @@ class GeneralTool {
                 val toast = Toast.makeText(context, msg, duration)
                 val viewId = Resources.getSystem()
                     .getIdentifier("message", "id", "android")
-                val textView = toast.view.findViewById<TextView>(viewId)
-                textView.textSize = 18f
+                val textView = toast.view?.findViewById<TextView>(viewId)
+                textView?.textSize = 18f
                 toast.show()
                 time = System.currentTimeMillis()
             }

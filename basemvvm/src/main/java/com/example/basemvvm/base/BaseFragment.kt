@@ -34,8 +34,6 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment() {
 
     abstract fun observeLiveData()
 
-    open fun getViewModelFactory(): ViewModelProvider.Factory? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root: View = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(container!!.context), getLayoutId(), container, false).root
         mViewDataBinding = DataBindingUtil.bind(root)!!

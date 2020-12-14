@@ -1,6 +1,7 @@
 package com.example.basemvvm.interview
 
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.basemvvm.R
@@ -17,13 +18,14 @@ import com.example.basemvvm.databinding.ActivityInterviewBinding
  ****************************************************/
 
 class InterviewActivity : BaseActivity<ActivityInterviewBinding>() {
+    private val mViewModel by viewModels<InterviewViewModel>()
 
-    val yrr : ViewModel by viewModels<InterviewViewModel>()
     override fun getLayoutId(): Int {
        return R.layout.activity_interview
     }
 
     override fun initConfiguration() {
+        mViewModel.getPhotos()
     }
 
     override fun initListener() {

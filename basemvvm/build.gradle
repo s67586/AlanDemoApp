@@ -2,18 +2,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: "kotlin-kapt"
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.example.basemvvm"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -30,7 +31,7 @@ android {
     flavorDimensions "default"
     productFlavors {
         dev {
-            buildConfigField "String", "HOST", "\"https://api.themoviedb.org/\""
+            buildConfigField "String", "HOST", "\"https://jsonplaceholder.typicode.com/\""
             buildConfigField "String", "TMDB_API_KEY", properties.getProperty("tmdb_api_key")
         }
     }
@@ -113,6 +114,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     // Firebase Auth UI (第三方登入畫面模組)
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
 
 }
 

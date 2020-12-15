@@ -32,7 +32,6 @@ android {
     productFlavors {
         dev {
             buildConfigField "String", "HOST", "\"https://jsonplaceholder.typicode.com/\""
-            buildConfigField "String", "TMDB_API_KEY", properties.getProperty("tmdb_api_key")
         }
     }
 
